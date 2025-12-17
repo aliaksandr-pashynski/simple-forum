@@ -1,6 +1,7 @@
 package com.pashynski.forum.feature.topic;
 
 import com.pashynski.forum.feature.category.CategoryEntity;
+import com.pashynski.forum.feature.user.UserEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -32,4 +33,8 @@ public class TopicEntity {
     @ManyToOne(optional = false)
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
+
+    @ManyToOne
+    @JoinColumn(name = "created_by", nullable = false, updatable = false)
+    private UserEntity createdBy;
 }
