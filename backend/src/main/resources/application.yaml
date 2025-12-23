@@ -11,3 +11,6 @@ spring:
 server:
   servlet:
     context-path: /forum-service
+
+topics:
+  max-page-size: 20
