@@ -64,7 +64,7 @@ export default function CategoriesTable() {
                                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                                         <TextSnippetIcon sx={{ fontSize: 50, marginRight: '20px' }}></TextSnippetIcon>
                                         <Box>
-                                            <Box onClick={() => navigate(`/posts&categoryId=${category.id}`)}
+                                            <Box onClick={() => navigate(`/topics?categoryId=${category.id}`)}
                                                 sx={{
                                                     display: 'inline-block',
                                                     fontSize: '20px',
