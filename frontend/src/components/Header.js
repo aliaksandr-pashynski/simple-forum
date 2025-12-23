@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function Header() {
     const navigate = useNavigate();
     return (
-        <AppBar position="static" square={false} sx={{ bgcolor: 'rgb(255, 159, 28)', margin: '1% 0' }}>
+        <AppBar position="static" square={false} sx={{ bgcolor: '#ff9f1cff', margin: '1% 0' }}>
             <Container maxWidth="xl" sx={{ display: 'flex' }}>
                 <Box
                     onClick={() => navigate('/categories')}

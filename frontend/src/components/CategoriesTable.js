@@ -49,8 +49,8 @@ export default function CategoriesTable() {
         return (
 
             <TableContainer component={Paper} sx={{ marginBottom: '20px' }}>
-                <Table sx={{ minWidth: 650, color: "rgb(204, 204, 204)" }} aria-label="simple table">
-                    <TableHead sx={{ backgroundColor: 'rgb(64, 64, 64)', color: "inherit" }}>
+                <Table sx={{ minWidth: 650, color: "#ccccccff" }} aria-label="simple table">
+                    <TableHead sx={{ backgroundColor: '#404040ff', color: "inherit" }}>
                         <TableRow>
                             <StyledTableCell>Categories</StyledTableCell>
                             <StyledTableCell sx={{ width: "10%" }} align="center">Topics</StyledTableCell>
