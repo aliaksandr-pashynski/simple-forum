@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import Categories from './pages/Categories';
+import Topics from './pages/Topics';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Container } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -24,6 +25,7 @@ root.render(
         <Routes>
           <Route path="/" element={<Navigate to="/categories" replace />} />
           <Route path="categories" element={<Categories />} />
+          <Route path="topics" element={<Topics />} />
         </Routes>
       </BrowserRouter>
     </Container>

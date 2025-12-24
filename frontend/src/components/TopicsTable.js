@@ -1,9 +1,6 @@
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, styled } from '@mui/material';
-import { CategoryService } from '../api/CategoryService';
-import { useEffect, useState } from "react";
-import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+import ArticleIcon from '@mui/icons-material/Article';
 import CircularProgress from '@mui/material/CircularProgress';
-import { useNavigate } from "react-router-dom";
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
     backgroundColor: 'rgb(87, 90, 90)',
@@ -19,23 +16,12 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     borderColor: '#333532ff'
 }));
 
+export default function TopicsTable(props) {
+    const topics = props.topics;
+    const isLoading = props.isLoading;
 
-export default function CategoriesTable() {
 
-    const navigate = useNavigate();
-    const [categories, setCategories] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        CategoryService
-            .getCategories()
-            .then(setCategories)
-            .catch(setError)
-            .finally(() => setLoading(false));
-    }, []);
-
-    if (loading) {
+    if (isLoading) {
         return <Box
             sx={{
                 display: 'flex',
@@ -47,27 +33,25 @@ export default function CategoriesTable() {
         </Box>
     } else {
         return (
-
             <TableContainer component={Paper} sx={{ marginBottom: '20px' }}>
-                <Table sx={{ minWidth: 650, color: "#ccccccff" }} aria-label="simple table">
-                    <TableHead sx={{ backgroundColor: '#404040ff', color: "inherit" }}>
+                <Table sx={{ minWidth: 650, color: "rgb(204, 204, 204)" }} aria-label="simple table">
+                    <TableHead sx={{ backgroundColor: 'rgb(64, 64, 64)', color: "inherit" }}>
                         <TableRow>
-                            <StyledTableCell>Categories</StyledTableCell>
-                            <StyledTableCell sx={{ width: "10%" }} align="center">Topics</StyledTableCell>
+                            <StyledTableCell>Topics</StyledTableCell>
                             <StyledTableCell sx={{ width: "10%" }} align="center">Posts</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody >
-                        {categories.map((category) => (
-                            <StyledTableRow hover key={category.name}>
+                        {topics.map((topic) => (
+                            <StyledTableRow hover key={topic.id}>
                                 <StyledTableCell>
                                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                        <TextSnippetIcon sx={{ fontSize: 50, marginRight: '20px' }}></TextSnippetIcon>
+                                        <ArticleIcon sx={{ fontSize: 40, marginRight: '20px' }} />
                                         <Box>
-                                            <Box onClick={() => navigate(`/topics?categoryId=${category.id}`)}
+                                            <Box
                                                 sx={{
                                                     display: 'inline-block',
-                                                    fontSize: '20px',
+                                                    fontSize: '16px',
                                                     fontWeight: 700,
                                                     margin: 0,
                                                     "&:hover": {
@@ -76,14 +60,16 @@ export default function CategoriesTable() {
                                                     }
                                                 }}
                                             >
-                                                {category.name}
+                                                {topic.name}
                                             </Box>
-                                            <Box sx={{ fontSize: '14px' }}>{category.description}</Box>
+                                            <Box>
+                                                by <b>{topic.createdBy.username}</b> at {new Date(topic.createdAt).toLocaleString()}
+                                            </Box>
                                         </Box>
                                     </Box>
                                 </StyledTableCell>
-                                <StyledTableCell align="center">{category.topics}</StyledTableCell>
-                                <StyledTableCell align="center">{category.posts}</StyledTableCell>
+
+                                <StyledTableCell align="center">{topic.postsCount}</StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>
