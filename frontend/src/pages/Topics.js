@@ -1,11 +1,11 @@
 import { Fragment } from "react/jsx-runtime"
-import { TopicService } from '../api/TopicService';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import ForumPagination from '../components/ForumPagination';
 import TopicsTable from '../components/TopicsTable';
 import Header from '../components/Header';
 import { Box } from "@mui/material";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { ApiContext } from '../context/Context'
 
 export default function Topics() {
     const [searchParams] = useSearchParams();
@@ -18,10 +18,11 @@ export default function Topics() {
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const apiService = useContext(ApiContext);
 
     useEffect(() => {
         setLoading(true)
-        TopicService
+        apiService
             .getTopics(categoryId, page)
             .then(resp => {
                 console.log('debug 1');

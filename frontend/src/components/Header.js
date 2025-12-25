@@ -1,8 +1,11 @@
 import { AppBar } from '@mui/material';
 import { Container, Box } from '@mui/material';
 import { useNavigate } from "react-router-dom";
+import { ApiContext } from '../context/Context'
+import { useContext } from "react";
 
 export default function Header() {
+    const apiService = useContext(ApiContext);
     const navigate = useNavigate();
     return (
         <AppBar position="static" square={false} sx={{ bgcolor: '#ff9f1cff', margin: '1% 0' }}>

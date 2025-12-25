@@ -1,9 +1,9 @@
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, styled } from '@mui/material';
-import { CategoryService } from '../api/CategoryService';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useNavigate } from "react-router-dom";
+import { ApiContext } from '../context/Context'
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
     backgroundColor: 'rgb(87, 90, 90)',
@@ -26,9 +26,12 @@ export default function CategoriesTable() {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const apiService = useContext(ApiContext);
+
 
     useEffect(() => {
-        CategoryService
+        setLoading(true);
+        apiService
             .getCategories()
             .then(setCategories)
             .catch(setError)
