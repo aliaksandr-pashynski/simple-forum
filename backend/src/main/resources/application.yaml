@@ -2,6 +2,12 @@ spring:
   application:
     name: forum
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://alex-pash.ddns.net/keycloak/realms/forum-dev
+
   datasource:
     url: "jdbc:postgresql://${PG_DB_HOST}:${PG_DB_PORT}/${PG_DB_NAME}"
     driver-class-name: "org.postgresql.Driver"
