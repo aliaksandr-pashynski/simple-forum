@@ -5,6 +5,9 @@ import Topics from './pages/Topics';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Container } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Keycloak from 'keycloak-js';
+import { ApiContext } from './context/Context'
+import { ApiService } from './api/ApiService';
 
 import '@fontsource/titillium-web/300.css';
 import '@fontsource/titillium-web/400.css';
@@ -17,17 +20,29 @@ const theme = createTheme({
   },
 });
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <ThemeProvider theme={theme}>
-    <Container maxWidth="xl">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Navigate to="/categories" replace />} />
-          <Route path="categories" element={<Categories />} />
-          <Route path="topics" element={<Topics />} />
-        </Routes>
-      </BrowserRouter>
-    </Container>
-  </ThemeProvider>
-);
+const keycloak = new Keycloak({
+  url: "https://alex-pash.ddns.net/keycloak",
+  realm: "forum-dev",
+  clientId: "forum-frontend-dev"
+});
+
+keycloak.init({
+  onLoad: 'check-sso'
+}).then((auth) => {
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(
+    <ApiContext.Provider value={new ApiService(keycloak)}>
+      <ThemeProvider theme={theme}>
+        <Container maxWidth="xl">
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Navigate to="/categories" replace />} />
+              <Route path="categories" element={<Categories />} />
+              <Route path="topics" element={<Topics />} />
+            </Routes>
+          </BrowserRouter>
+        </Container>
+      </ThemeProvider>
+    </ApiContext.Provider>
+  )
+});
