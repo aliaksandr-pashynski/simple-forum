@@ -13,9 +13,19 @@ export class ApiService {
         })
         this.axiosInstance.interceptors.request.use(
             async (config) => {
-                // refresh token if needed
-                //   await keycloak.updateToken(30);
-                console.log('inside interceptor');
+                if (keycloak.refreshToken != null) {
+                    try {
+                        await keycloak.updateToken(30);
+                    } catch (error) {
+                        console.error('Failed to refresh token:', error);
+                    }
+                }
+
+                console.log('Request:', {
+                    method: config.method?.toUpperCase(),
+                    url: config.url,
+                    params: config.params,
+                });
                 if (this.keycloak?.authenticated) {
                     config.headers.Authorization = `Bearer ${this.keycloak.token}`;
                 }
@@ -38,5 +48,9 @@ export class ApiService {
                 size: size ?? 15,
             }
         });
+    }
+
+    getInfoAboutMe() {
+        return this.axiosInstance.get("/users/me").then(resp => resp.data);
     }
 }
