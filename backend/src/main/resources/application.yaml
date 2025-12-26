@@ -1,9 +1,6 @@
 spring:
   application:
     name: forum
-  #    http:
-  #      client:
-  #        connect-timeout: 10s
 
   security:
     oauth2:
