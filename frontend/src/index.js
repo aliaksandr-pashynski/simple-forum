@@ -8,6 +8,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Keycloak from 'keycloak-js';
 import { ApiContext } from './context/Context'
 import { ApiService } from './api/ApiService';
+import AppLayout from './pages/AppLayout';
 
 import '@fontsource/titillium-web/300.css';
 import '@fontsource/titillium-web/400.css';
@@ -37,8 +38,10 @@ keycloak.init({
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Navigate to="/categories" replace />} />
-              <Route path="categories" element={<Categories />} />
-              <Route path="topics" element={<Topics />} />
+              <Route element={<AppLayout />}>
+                <Route path="categories" element={<Categories />} />
+                <Route path="topics" element={<Topics />} />
+              </Route>
             </Routes>
           </BrowserRouter>
         </Container>

@@ -12,8 +12,6 @@ export default function LoginSection() {
 
     const [userData, setUserData] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
@@ -32,7 +30,6 @@ export default function LoginSection() {
                 .then(resp => {
                     setUserData(resp);
                 })
-                .catch(setError)
                 .finally(() => setLoading(false));
         }
     }, []);
@@ -94,7 +91,7 @@ export default function LoginSection() {
                             </Menu>
                         </Fragment>
                 }
-            </Box >
+            </Box>
         )
     }
 }

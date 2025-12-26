@@ -13,21 +13,6 @@ export class ApiService {
         })
         this.axiosInstance.interceptors.request.use(
             async (config) => {
-                // refresh token if needed
-                //   await keycloak.updateToken(30);
-                // console.log(`keycloak.authenticated = ${keycloak.authenticated}`);
-                // var expired = keycloak.isTokenExpired();
-                // console.log(`keycloak.isTokenExpired() = ${expired}`);
-                // if (keycloak.authenticated && keycloak.isTokenExpired()) {
-                //     console.log('Token expired. Refreshing...');
-                //     //   await keycloak.updateToken(30);
-                // }
-                //  await keycloak.updateToken(30);
-
-
-                // console.log(`keycloak.isTokenExpired() = ${keycloak.isTokenExpired()}`);
-                // console.log(`keycloak.authenticated = ${keycloak.authenticated}`);
-
                 if (keycloak.refreshToken != null) {
                     try {
                         await keycloak.updateToken(30);
@@ -40,7 +25,6 @@ export class ApiService {
                     method: config.method?.toUpperCase(),
                     url: config.url,
                     params: config.params,
-                    // headers: config.headers
                 });
                 if (this.keycloak?.authenticated) {
                     config.headers.Authorization = `Bearer ${this.keycloak.token}`;

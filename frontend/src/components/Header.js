@@ -22,9 +22,7 @@ export default function Header() {
                             cursor: 'pointer'
                         }
                     }}>Simple forum</Box>
-                <LoginSection>
-
-                </LoginSection>
+                <LoginSection />
             </Container>
         </AppBar >
     )
