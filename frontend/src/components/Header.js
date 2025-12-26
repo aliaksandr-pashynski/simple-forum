@@ -1,20 +1,18 @@
 import { AppBar } from '@mui/material';
 import { Container, Box } from '@mui/material';
 import { useNavigate } from "react-router-dom";
-import { ApiContext } from '../context/Context'
-import { useContext } from "react";
+import LoginSection from './LoginSection'
 
 export default function Header() {
-    const apiService = useContext(ApiContext);
     const navigate = useNavigate();
     return (
         <AppBar position="static" square={false} sx={{ bgcolor: '#ff9f1cff', margin: '1% 0' }}>
-            <Container maxWidth="xl" sx={{ display: 'flex' }}>
+            <Container maxWidth="xl" sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Box
                     onClick={() => navigate('/categories')}
                     sx={{
                         textTransform: 'uppercase',
-                        color: 'rgb(51, 51, 51)',
+                        color: '#333333ff',
                         textDecorationLine: 'underline',
                         fontWeight: 700,
                         fontSize: '33px',
@@ -24,6 +22,9 @@ export default function Header() {
                             cursor: 'pointer'
                         }
                     }}>Simple forum</Box>
+                <LoginSection>
+
+                </LoginSection>
             </Container>
         </AppBar >
     )

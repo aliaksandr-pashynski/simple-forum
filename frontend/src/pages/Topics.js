@@ -25,7 +25,6 @@ export default function Topics() {
         apiService
             .getTopics(categoryId, page)
             .then(resp => {
-                console.log('debug 1');
                 setTopics(resp.data.content);
                 setCount(resp.data.totalPages);
                 setCurrentPage(resp.data.number + 1);

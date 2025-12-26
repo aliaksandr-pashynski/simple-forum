@@ -20,6 +20,11 @@ public class UserController {
 
     @GetMapping("/users/me")
     public ResponseEntity<?> getInfoAboutYourself(@AuthenticationPrincipal Jwt token) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         UserDto user = userService.findById(UUID.fromString(token.getSubject())).orElse(null);
         if (user == null) {
             user = userService.saveUserFromJwtToken(token);
