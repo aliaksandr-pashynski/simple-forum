@@ -3,6 +3,7 @@ package com.pashynski.forum.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -27,7 +28,8 @@ public class SecurityConfig {
                                 oauth2.jwt(c -> c.jwtAuthenticationConverter(customJwtConverter()))
                 ).authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/api/v1/users/**").hasRole("FORUM_USER")
-                        .requestMatchers("/api/v1/categories/**", "/api/v1/topics/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/topics/**").hasRole("FORUM_USER")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/categories/**", "/api/v1/topics/**").permitAll()
                         .anyRequest().authenticated()
                 ).build();
     }

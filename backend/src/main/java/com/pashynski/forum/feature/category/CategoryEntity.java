@@ -31,4 +31,8 @@ public class CategoryEntity {
     @CreationTimestamp
     @Column(name = "created_at", updatable = false, insertable = false)
     private Instant createdAt;
+
+    public void incrementTopicsCounter() {
+        this.topics++;
+    }
 }
