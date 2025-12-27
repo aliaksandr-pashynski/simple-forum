@@ -1,11 +1,15 @@
 package com.pashynski.forum.feature.category;
 
 import com.pashynski.forum.feature.category.dto.CategoryDto;
+import jakarta.persistence.OptimisticLockException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @AllArgsConstructor
 @Transactional
@@ -18,5 +22,15 @@ public class CategoryService {
     public List<CategoryDto> getCategories() {
         List<CategoryEntity> categoryEntities = categoryRepository.findAll();
         return categoryEntities.stream().map(categoryMapper::toDto).toList();
+    }
+
+    @Retryable(
+            value = OptimisticLockException.class,
+            maxAttempts = 5,
+            backoff = @Backoff(delay = 20)
+    )
+    public void incrementTopicsCounter(UUID categoryId) {
+        CategoryEntity category = categoryRepository.getReferenceById(categoryId);
+        category.incrementTopicsCounter();
     }
 }
