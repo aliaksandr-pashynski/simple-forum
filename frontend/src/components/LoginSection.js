@@ -42,7 +42,10 @@ export default function LoginSection() {
                 endIcon={<LoginIcon />}
                 sx={{
                     backgroundColor: '#333333ff',
-                    color: '#ff9f1cff'
+                    color: '#ff9f1cff',
+                    '&:hover': {
+                        backgroundColor: '#575a5aff'
+                    }
                 }}
             >
                 Login

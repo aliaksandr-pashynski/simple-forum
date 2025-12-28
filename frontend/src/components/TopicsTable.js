@@ -3,7 +3,7 @@ import ArticleIcon from '@mui/icons-material/Article';
 import CircularProgress from '@mui/material/CircularProgress';
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    backgroundColor: 'rgb(87, 90, 90)',
+    backgroundColor: '#575a5aff',
     color: "inherit",
     '&.MuiTableRow-hover:hover': {
         backgroundColor: '#ff9f1cff',
