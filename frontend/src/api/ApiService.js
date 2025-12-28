@@ -53,4 +53,8 @@ export class ApiService {
     getInfoAboutMe() {
         return this.axiosInstance.get("/users/me").then(resp => resp.data);
     }
+
+    createTopic(request) {
+        return this.axiosInstance.post("/topics", request).then(resp => resp.data);
+    }
 }
