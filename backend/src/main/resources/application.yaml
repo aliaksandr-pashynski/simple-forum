@@ -20,3 +20,5 @@ server:
 
 topics:
   max-page-size: 20
+posts:
+  max-page-size: 20

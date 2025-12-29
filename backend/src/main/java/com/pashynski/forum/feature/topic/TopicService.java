@@ -6,11 +6,14 @@ import com.pashynski.forum.feature.topic.dto.SaveTopicDto;
 import com.pashynski.forum.feature.topic.dto.TopicDto;
 import com.pashynski.forum.feature.user.UserEntity;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.OptimisticLockException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -44,5 +47,15 @@ public class TopicService {
             }
             throw e;
         }
+    }
+
+    @Retryable(
+            value = OptimisticLockException.class,
+            maxAttempts = 5,
+            backoff = @Backoff(delay = 20)
+    )
+    public void incrementPostsCounter(UUID topicId) {
+        TopicEntity topicEntity = topicRepository.getReferenceById(topicId);
+        topicEntity.incrementPostsCount();
     }
 }
