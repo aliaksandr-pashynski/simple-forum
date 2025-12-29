@@ -28,8 +28,17 @@ public class SecurityConfig {
                                 oauth2.jwt(c -> c.jwtAuthenticationConverter(customJwtConverter()))
                 ).authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/api/v1/users/**").hasRole("FORUM_USER")
-                        .requestMatchers(HttpMethod.POST, "/api/v1/topics/**").hasRole("FORUM_USER")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/categories/**", "/api/v1/topics/**").permitAll()
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/v1/topics/**",
+                                "/api/v1/posts/**"
+                        ).hasRole("FORUM_USER")
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/v1/categories/**",
+                                "/api/v1/topics/**",
+                                "/api/v1/posts/**"
+                        ).permitAll()
                         .anyRequest().authenticated()
                 ).build();
     }

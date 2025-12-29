@@ -33,4 +33,14 @@ public class CategoryService {
         CategoryEntity category = categoryRepository.getReferenceById(categoryId);
         category.incrementTopicsCounter();
     }
+
+    @Retryable(
+            value = OptimisticLockException.class,
+            maxAttempts = 5,
+            backoff = @Backoff(delay = 20)
+    )
+    public void incrementPostsCounter(UUID topicId) {
+        CategoryEntity category = categoryRepository.findByTopicId(topicId);
+        category.incrementPostsCounter();
+    }
 }
