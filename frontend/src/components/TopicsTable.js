@@ -1,6 +1,7 @@
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, styled } from '@mui/material';
 import ArticleIcon from '@mui/icons-material/Article';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useNavigate } from "react-router-dom";
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
     backgroundColor: '#575a5aff',
@@ -19,7 +20,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 export default function TopicsTable(props) {
     const topics = props.topics;
     const isLoading = props.isLoading;
-
+    const navigate = useNavigate();
 
     if (isLoading) {
         return <Box
@@ -59,6 +60,7 @@ export default function TopicsTable(props) {
                                                         cursor: 'pointer'
                                                     }
                                                 }}
+                                                onClick={() => navigate(`/posts?topicId=${topic.id}`)}
                                             >
                                                 {topic.name}
                                             </Box>

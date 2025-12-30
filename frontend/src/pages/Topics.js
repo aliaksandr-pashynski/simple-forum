@@ -24,8 +24,8 @@ export default function Topics() {
       .getTopics(categoryId, page)
       .then(resp => {
         setTopics(resp.data.content);
-        setCount(resp.data.totalPages);
-        setCurrentPage(resp.data.number + 1);
+        setCount(resp.data.page.totalPages);
+        setCurrentPage(resp.data.page.number + 1);
       })
       .finally(() => setLoading(false));
   }, [page, categoryId]);

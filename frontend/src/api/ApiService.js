@@ -57,4 +57,18 @@ export class ApiService {
     createTopic(request) {
         return this.axiosInstance.post("/topics", request).then(resp => resp.data);
     }
+
+    getPosts(topicId, page, size) {
+        return this.axiosInstance.get("/posts", {
+            params: {
+                topicId,
+                page: page ?? 0,
+                size: size ?? 10,
+            }
+        }).then(resp => resp.data);
+    }
+
+    createPost(request) {
+        return this.axiosInstance.post("/posts", request).then(resp => resp.data);
+    }
 }
