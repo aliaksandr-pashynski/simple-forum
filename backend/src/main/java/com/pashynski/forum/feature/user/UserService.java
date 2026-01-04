@@ -32,4 +32,11 @@ public class UserService {
         UserEntity saved = userRepository.saveAndFlush(userEntity);
         return userMapper.toUserDto(saved);
     }
+
+    public UserDto updateAvatar(UUID userId, String avatar) {
+        UserEntity userEntity = userRepository.getReferenceById(userId);
+        userEntity.setAvatar(avatar);
+        UserEntity savedUser = userRepository.save(userEntity);
+        return userMapper.toUserDto(savedUser);
+    }
 }

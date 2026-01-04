@@ -1,6 +1,9 @@
 package com.pashynski.forum.common;
 
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -27,5 +30,15 @@ public class GlobalExceptionHandler {
                 .getFieldErrors()
                 .forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
         return errors;
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<Map<String, String>> handle(ConstraintViolationException e) {
+        String msg = e.getConstraintViolations()
+                .stream()
+                .map(ConstraintViolation::getMessage)
+                .findFirst()
+                .orElse("constraint violation");
+        return ResponseEntity.badRequest().body(Map.of("error", msg));
     }
 }

@@ -31,4 +31,6 @@ public class UserEntity {
     @CreationTimestamp
     @Column(name = "registered_at", updatable = false, insertable = false)
     private Instant registeredAt;
+
+    private String avatar;
 }
