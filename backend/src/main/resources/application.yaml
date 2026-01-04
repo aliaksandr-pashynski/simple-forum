@@ -22,3 +22,9 @@ topics:
   max-page-size: 20
 posts:
   max-page-size: 20
+
+minio:
+  url: http://192.168.100.6:30010
+  accessKey: minioadmin
+  secretKey: minioadmin
+  bucket: public
