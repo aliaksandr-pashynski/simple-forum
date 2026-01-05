@@ -32,6 +32,7 @@ public class ForumService {
     public TopicDto saveTopic(SaveTopicDto saveTopicDto, UUID createdBy) {
         TopicDto topicDto = topicService.saveTopic(saveTopicDto, createdBy);
         categoryService.incrementTopicsCounter(saveTopicDto.categoryId());
+        userService.incrementTopicsCounter(createdBy);
         return topicDto;
     }
 
@@ -39,6 +40,7 @@ public class ForumService {
         PostDto postDto = postService.savePost(savePostDto, createdBy);
         topicService.incrementPostsCounter(savePostDto.topicId());
         categoryService.incrementPostsCounter(savePostDto.topicId());
+        userService.incrementPostsCounter(createdBy);
         return postDto;
     }
 
