@@ -9,6 +9,7 @@ public record UserDto(
         String email,
         long postsCreated,
         long topicsCreated,
-        Instant registeredAt
+        Instant registeredA,
+        String avatar
 ) {
 }

@@ -33,4 +33,12 @@ public class UserEntity {
     private Instant registeredAt;
 
     private String avatar;
+
+    public void incrementTopicsCounter() {
+        this.topicsCreated++;
+    }
+
+    public void incrementPostsCounter() {
+        this.postsCreated++;
+    }
 }

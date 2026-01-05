@@ -3,8 +3,11 @@ package com.pashynski.forum.feature.user;
 import com.pashynski.forum.feature.user.dto.UserDto;
 import com.pashynski.forum.feature.user.mapper.JwtToUserEntityMapper;
 import com.pashynski.forum.feature.user.mapper.UserMapper;
+import jakarta.persistence.OptimisticLockException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
@@ -38,5 +41,25 @@ public class UserService {
         userEntity.setAvatar(avatar);
         UserEntity savedUser = userRepository.save(userEntity);
         return userMapper.toUserDto(savedUser);
+    }
+
+    @Retryable(
+            value = OptimisticLockException.class,
+            maxAttempts = 5,
+            backoff = @Backoff(delay = 20)
+    )
+    public void incrementTopicsCounter(UUID userId) {
+        UserEntity userEntity = userRepository.getReferenceById(userId);
+        userEntity.incrementTopicsCounter();
+    }
+
+    @Retryable(
+            value = OptimisticLockException.class,
+            maxAttempts = 5,
+            backoff = @Backoff(delay = 20)
+    )
+    public void incrementPostsCounter(UUID userId) {
+        UserEntity userEntity = userRepository.getReferenceById(userId);
+        userEntity.incrementPostsCounter();
     }
 }
