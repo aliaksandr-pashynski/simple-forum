@@ -4,21 +4,21 @@ import LoginIcon from '@mui/icons-material/Login';
 import PersonIcon from '@mui/icons-material/Person';
 import { useEffect, useState, useContext, Fragment } from "react";
 import Skeleton from '@mui/material/Skeleton';
-import { Menu, MenuItem, Box, Avatar } from '@mui/material';
-
+import { Menu, MenuItem, Box, Avatar, Divider } from '@mui/material';
+import AvatarDialog from './AvatarDialog';
 
 export default function LoginSection() {
     const apiService = useContext(ApiContext);
-
     const [userData, setUserData] = useState(null);
+    const [userAvatar, setUserAvatar] = useState(null);
     const [loading, setLoading] = useState(true);
-
+    const [avatarDialogOpen, setAvatarDialogOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
-    const handleClose = () => {
+    const handleMenuClose = () => {
         setAnchorEl(null);
     };
 
@@ -29,6 +29,7 @@ export default function LoginSection() {
                 .getInfoAboutMe()
                 .then(resp => {
                     setUserData(resp);
+                    setUserAvatar(resp.avatar);
                 })
                 .finally(() => setLoading(false));
         }
@@ -63,7 +64,7 @@ export default function LoginSection() {
                         :
                         <Fragment>
                             <Box sx={{
-                                margin: '0 10px',
+                                margin: '0 15px',
                                 color: '#333333ff',
                                 fontWeight: 700,
                                 fontSize: '20px'
@@ -73,28 +74,38 @@ export default function LoginSection() {
                             <Avatar
                                 onClick={handleClick}
                                 sx={{
+                                    width: 70, height: 70,
                                     backgroundColor: '#333333ff',
                                     marginRight: '10px',
                                     cursor: 'pointer'
-                                }}>
-                                <PersonIcon />
+                                }}
+                                src={`https://alex-pash.ddns.net/minio/public/${userAvatar}`}
+                            >
+
+                                <PersonIcon sx={{ fontSize: 45 }} />
                             </Avatar>
                             <Menu
                                 id="profile-menu"
                                 anchorEl={anchorEl}
-                                open={open}
-                                onClose={handleClose}
+                                open={anchorEl}
+                                onClose={handleMenuClose}
                                 slotProps={{
                                     list: {
                                         'aria-labelledby': 'basic-button',
                                     },
                                 }}
                             >
+                                <MenuItem onClick={() => {
+                                    handleMenuClose();
+                                    setAvatarDialogOpen(true);
+                                }}>Profile picture</MenuItem>
+                                <Divider />
                                 <MenuItem onClick={() => apiService.keycloak.logout()}>Logout</MenuItem>
                             </Menu>
+                            <AvatarDialog open={avatarDialogOpen} setOpen={setAvatarDialogOpen} avatarUpdateCallback={setUserAvatar}></AvatarDialog>
                         </Fragment>
                 }
-            </Box>
+            </Box >
         )
     }
 }
