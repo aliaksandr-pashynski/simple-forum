@@ -71,4 +71,10 @@ export class ApiService {
     createPost(request) {
         return this.axiosInstance.post("/posts", request).then(resp => resp.data);
     }
+
+    uploadAvatar(request) {
+        return this.axiosInstance.post("/users/avatar", request, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+        }).then(resp => resp.data);
+    }
 }

@@ -82,7 +82,9 @@ export default function Posts() {
                   </Grid>
                   <Grid size={2} >
                     <Box sx={{ margin: '0 20px' }}>
-                      <Avatar variant="rounded" sx={{ width: 80, height: 80, marginBottom: '5px' }}>
+                      <Avatar variant="rounded" sx={{ width: 80, height: 80, marginBottom: '5px' }}
+                        src={`https://alex-pash.ddns.net/minio/public/${p.createdBy.avatar}`}
+                      >
                         <PersonIcon sx={{ fontSize: 50 }} />
                       </Avatar>
                       <Box sx={{ color: '#FF7E00', fontWeight: 700 }}>
