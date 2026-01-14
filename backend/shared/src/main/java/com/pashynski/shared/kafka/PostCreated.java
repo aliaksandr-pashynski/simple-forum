@@ -2,8 +2,9 @@ package com.pashynski.shared.kafka;
 
 import java.util.UUID;
 
-public record PostCreatedMessage(
+public record PostCreated(
         UUID id,
-        String body
+        String body,
+        UUID topicId
 ) {
 }

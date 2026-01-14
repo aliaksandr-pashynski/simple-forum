@@ -35,7 +35,7 @@ public class ForumService {
         TopicDto topicDto = topicService.saveTopic(saveTopicDto, createdBy);
         categoryService.incrementTopicsCounter(saveTopicDto.categoryId());
         userService.incrementTopicsCounter(createdBy);
-        kafkaService.topicCreated(saveTopicDto, createdBy);
+        kafkaService.topicCreated(topicDto);
         return topicDto;
     }
 
@@ -44,6 +44,7 @@ public class ForumService {
         topicService.incrementPostsCounter(savePostDto.topicId());
         categoryService.incrementPostsCounter(savePostDto.topicId());
         userService.incrementPostsCounter(createdBy);
+        kafkaService.postCreated(postDto);
         return postDto;
     }
 

@@ -9,6 +9,7 @@ public record PostDto(
         UUID id,
         String body,
         Instant createdAt,
-        CreatedByDto createdBy
+        CreatedByDto createdBy,
+        UUID topicId
 ) {
 }
