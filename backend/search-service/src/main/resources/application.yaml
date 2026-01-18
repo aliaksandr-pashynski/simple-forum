@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: search-service
+
+  kafka:
+    template:
+      default-topic: forum-dev
+    producer:
+      bootstrap-servers: 192.168.100.6:30005
+      value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer
+    consumer:
+      bootstrap-servers: 192.168.100.6:30005
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      group-id: search-service
+      properties:
+        spring.json.trusted.packages: com.pashynski.shared.kafka
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JacksonJsonDeserializer
+
+server:
+  port: 8081
+  servlet:
+    context-path: /search-service
