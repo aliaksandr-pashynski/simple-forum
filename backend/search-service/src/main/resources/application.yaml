@@ -2,6 +2,9 @@ spring:
   application:
     name: search-service
 
+  elasticsearch:
+    uris: ${ELK_URI}
+
   kafka:
     template:
       default-topic: forum-dev
