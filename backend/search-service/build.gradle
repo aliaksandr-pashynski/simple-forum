@@ -28,6 +28,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-kafka'
     implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+    implementation 'org.springframework.cloud:spring-cloud-starter-consul-discovery:5.0.1'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation project(':shared')
     implementation 'org.mapstruct:mapstruct:1.6.3'
 

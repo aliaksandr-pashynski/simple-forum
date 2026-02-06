@@ -5,6 +5,17 @@ spring:
   elasticsearch:
     uris: ${ELK_URI}
 
+  cloud:
+    consul:
+      host: 192.168.100.6
+      port: 30080
+      discovery:
+        #        register-health-check: false
+        heartbeat:
+          enabled: true
+          ttl: 10s
+
+  
   kafka:
     template:
       default-topic: forum-dev
@@ -19,6 +30,17 @@ spring:
         spring.json.trusted.packages: com.pashynski.shared.kafka
         spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JacksonJsonDeserializer
 
+#management:
+#  server:
+#    port: 4452
+#  endpoints:
+#    web:
+#      exposure:
+#        include: health,info  # Or "*" for all endpoints
+#    endpoint:
+#      health:
+#        enabled: true
+#        show-details: always
 server:
   port: 8081
   servlet:
