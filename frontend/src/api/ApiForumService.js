@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export class ApiService {
+export class ApiForumService {
 
     constructor(keycloak) {
         this.keycloak = keycloak;
