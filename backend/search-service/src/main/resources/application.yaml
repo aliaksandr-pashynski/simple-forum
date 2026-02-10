@@ -2,22 +2,15 @@ spring:
   application:
     name: search-service
 
-  elasticsearch:
-    uris: ${ELK_URI}
-
-  kafka:
-    template:
-      default-topic: forum-dev
-    producer:
-      bootstrap-servers: 192.168.100.6:30005
-      value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer
-    consumer:
-      bootstrap-servers: 192.168.100.6:30005
-      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
-      group-id: search-service
-      properties:
-        spring.json.trusted.packages: com.pashynski.shared.kafka
-        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JacksonJsonDeserializer
+  cloud:
+    consul:
+      config:
+        format: YAML
+        data-key: data
+        fail-fast: true
+      discovery:
+        healthCheckPath: ${server.servletPath}/actuator/health
+        healthCheckInterval: 15s
 
 server:
   port: 8081
