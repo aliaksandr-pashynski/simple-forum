@@ -20,6 +20,8 @@ dependencies {
     implementation 'io.minio:minio:8.6.0'
     implementation project(':shared')
     implementation 'org.mapstruct:mapstruct:1.6.3'
+    implementation 'org.springframework.cloud:spring-cloud-starter-consul-discovery'
+    implementation 'org.springframework.cloud:spring-cloud-starter-consul-config'
 
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
