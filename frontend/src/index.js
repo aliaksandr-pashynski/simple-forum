@@ -38,9 +38,9 @@ keycloak.init({
       <ApiSearchContext.Provider value={new ApiSearchService()}>
         <ThemeProvider theme={theme}>
           <Container maxWidth="xl">
-            <BrowserRouter>
+            <BrowserRouter basename="/simple-forum/ui">
               <Routes>
-                <Route path="/" element={<Navigate to="/categories" replace />} />
+                <Route path="/" element={<Navigate to="categories" replace />} />
                 <Route element={<AppLayout />}>
                   <Route path="categories" element={<Categories />} />
                   <Route path="topics" element={<Topics />} />
