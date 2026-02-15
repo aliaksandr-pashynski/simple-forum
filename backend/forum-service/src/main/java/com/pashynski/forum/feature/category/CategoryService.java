@@ -4,6 +4,7 @@ import com.pashynski.forum.feature.category.dto.CategoryDto;
 import jakarta.persistence.OptimisticLockException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class CategoryService {
     private final CategoryMapper categoryMapper;
 
     public List<CategoryDto> getCategories() {
-        List<CategoryEntity> categoryEntities = categoryRepository.findAll();
+        List<CategoryEntity> categoryEntities = categoryRepository.findAll(Sort.by("priority").descending());
         return categoryEntities.stream().map(categoryMapper::toDto).toList();
     }
 
