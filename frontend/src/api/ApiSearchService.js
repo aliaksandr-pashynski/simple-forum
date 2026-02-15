@@ -4,7 +4,7 @@ export class ApiSearchService {
 
     constructor() {
         this.axiosInstance = axios.create({
-            baseURL: "http://localhost:8081/search-service/",
+            baseURL: "https://alex-pash.ddns.net/simple-forum/search-service/",
             timeout: 5000,
             headers: {
                 "Content-Type": "application/json",
