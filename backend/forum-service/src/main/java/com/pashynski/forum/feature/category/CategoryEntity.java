@@ -36,6 +36,8 @@ public class CategoryEntity {
 
     @OneToMany(mappedBy = "category")
     private List<TopicEntity> topicsEntities;
+    
+    private int priority;
 
     public void incrementTopicsCounter() {
         this.topics++;
