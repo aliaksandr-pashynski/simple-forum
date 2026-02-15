@@ -5,7 +5,7 @@ export class ApiForumService {
     constructor(keycloak) {
         this.keycloak = keycloak;
         this.axiosInstance = axios.create({
-            baseURL: "http://localhost:8080/forum-service/api/v1/",
+            baseURL: "https://alex-pash.ddns.net/simple-forum/forum-service/api/v1/",
             timeout: 5000,
             headers: {
                 "Content-Type": "application/json",
