@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-@KafkaListener(topics = "forum-dev", containerPostProcessor = "listenerPostProcessor")
+@KafkaListener(topics = "${kafka.topic}", containerPostProcessor = "listenerPostProcessor")
 public class ForumEventsListener {
 
     private final TopicService topicService;
