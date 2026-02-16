@@ -7,7 +7,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.util.UUID;
 
-@Document(indexName = "topics")
+@Document(indexName = "${elk.documents.topics}")
 public record Topic(
         @Id
         UUID id,
