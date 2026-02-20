@@ -6,6 +6,11 @@ topics, engage in discussions, and explore different categories.
 🔗 **Live Demo:
 ** [https://alex-pash.ddns.net/simple-forum/ui/categories](https://alex-pash.ddns.net/simple-forum/ui/categories)
 
+## 🚧 Status
+
+This project is actively developed. New features are added incrementally as I continue learning and exploring new
+technologies.
+
 ## 🎯 Purpose
 
 This project was created to gain hands-on experience with enterprise-grade technologies and patterns:
@@ -23,8 +28,11 @@ This project was created to gain hands-on experience with enterprise-grade techn
 ## ✨ Features
 
 - **Category-based Organization** – Browse discussions by topic areas
-- **Thread Creation** – Start new conversations within categories
+- **Topic Creation** – Start new conversations within categories
+- **Post Creation** – Reply and contribute within existing topics
 - **User Authentication** – Secure registration and login system
+- **Profile Customization** – Upload and manage your profile image
+- **Full-text Search** – Find topics quickly with Elasticsearch-powered search
 
 ## 🛠️ Tech Stack
 
