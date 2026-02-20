@@ -50,3 +50,17 @@ This project was created to gain hands-on experience with enterprise-grade techn
 ## 🏗️ Architecture
 
 ![Architecture Diagram](docs/architecture.png)
+
+## 📸 Screenshots
+
+### Categories Page
+
+![Categories](docs/screenshots/categories.png)
+
+### Topics Page
+
+![Categories](docs/screenshots/topics.png)
+
+### Thread Discussion
+
+![Thread](docs/screenshots/posts.png)
