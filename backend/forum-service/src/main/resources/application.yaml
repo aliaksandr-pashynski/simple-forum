@@ -18,3 +18,14 @@ spring:
 server:
   servlet:
     context-path: /forum-service
+
+---
+# Production Configuration
+spring:
+  config:
+    activate:
+      on-profile: prod
+  cloud:
+    consul:
+      host: consul-server.infra.svc.cluster.local
+      port: 8500
