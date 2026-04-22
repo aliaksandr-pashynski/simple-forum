@@ -5,7 +5,7 @@ spring:
     import: "consul:"
   cloud:
     consul:
-      host: 192.168.100.6
+      host: 192.168.100.5
       port: 30580
       config:
         format: YAML
@@ -19,3 +19,13 @@ server:
   port: 8081
   servlet:
     context-path: /search-service
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  cloud:
+    consul:
+      host: consul-server.infra.svc.cluster.local
+      port: 8500
